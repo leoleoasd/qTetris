@@ -1,12 +1,18 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QPainter>
+#include <QTimer>
+#include <QRandomGenerator>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , dropTimer(new QTimer)
+    , renderTimer(new QTimer)
 {
     ui->setupUi(this);
+    connect(renderTimer, &QTimer::timeout, this, QOverload<>::of(&MainWindow::update));
+    renderTimer->start(1000 / 120); // 120fps
 }
 
 MainWindow::~MainWindow()
@@ -29,5 +35,10 @@ void MainWindow::paintEvent(QPaintEvent *event)
     painter.setFont(font);
 
     // 绘制文本
-    painter.drawText(rect(), Qt::AlignCenter, "Qt");
+    painter.drawText(rect(), Qt::AlignCenter, QString::number((int)generateTetris()));
+}
+
+
+Tetromino MainWindow::generateTetris(){
+    return (Tetromino)(QRandomGenerator::global()->bounded(7));
 }

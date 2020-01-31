@@ -7,6 +7,8 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+enum class Tetromino {IPolyomino, OPolyomino, TPolyomino, JPolyomino, LPolyomino, SPolyomino, ZPolyomino};
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -14,23 +16,28 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    virtual void paintEvent(QPaintEvent *event);
 
 private:
     Ui::MainWindow *ui;
-    int map[10][20] {0}; //模拟右手系第一象限
+    QTimer *dropTimer, *renderTimer;
+    const static int MAXX = 10;
+    const static int MAXY = 20;
+
+    int map[MainWindow::MAXX][MainWindow::MAXY]; //模拟右手系第一象限
     bool tetromino[7][4][4][4]; //七种不同方块，每个方块有四个方向，存在4*4的数组里，每个元素非1即0
-    enum TetrominoName {IPolyomino, OPolyomino, TPolyomino, JPolyomino, LPolyomino, SPolyomino, ZPolyomino}; //与teromino数组联用，增强可读性
     struct {
         int x;
         int y;
         int name;
         int direction;
     }tetrominoCurrent;
+    Tetromino current, next;
+    Tetromino generateTetris();
     void doDownEvent();
     void doLeftEvent();
     void doRightEvent();
     void doRotateEvent();
-    void movementIsLegal();
+    bool overlapping();
+    void paintEvent(QPaintEvent *event) override;
 };
 #endif // MAINWINDOW_H
