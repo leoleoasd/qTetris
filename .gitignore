@@ -74,3 +74,9 @@ Thumbs.db
 cmake-build-*
 
 .idea
+
+CMakeFiles
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+qtetris_autogen
