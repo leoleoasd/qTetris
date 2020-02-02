@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(renderTimer, &QTimer::timeout, this, QOverload<>::of(&MainWindow::update));
+    connect(dropTimer, &QTimer::timeout, this, QOverload<>::of(&MainWindow::drop));
     renderTimer->start(1000 / 120); // 120fps
 }
 
@@ -30,7 +31,7 @@ void MainWindow::paintEvent(QPaintEvent *event)
     // 设置画笔颜色
     painter.setPen(QColor(0, 160, 230));
 
-    // 设置字体：微软雅黑、点大小50、斜体
+    // 设置字体：点大小12、斜体
     QFont font;
     font.setPointSize(12);
     font.setItalic(true);
