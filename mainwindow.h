@@ -44,5 +44,6 @@ private:
     void doRotateEvent();
     bool overlapping();
     void paintEvent(QPaintEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
 };
 #endif // MAINWINDOW_H
