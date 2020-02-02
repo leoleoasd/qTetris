@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow(){
     delete ui;
+    delete dropTimer;
+    delete renderTimer;
 }
 
 void MainWindow::paintEvent(QPaintEvent *event){
@@ -25,6 +27,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
     Q_UNUSED(event);
 
     QPainter painter(this);
+    /*
+     *
     // 设置画笔颜色
     painter.setPen(QColor(0, 160, 230));
 
@@ -37,11 +41,17 @@ void MainWindow::paintEvent(QPaintEvent *event){
     // 绘制文本
     painter.drawText(0,12, QString::number((int)generateTetris()));
     painter.drawText(0,24,QString::number(1000.0/(QTime::currentTime().msecsSinceStartOfDay() - last_frame_time)) + QString::fromLocal8Bit("fps."));
+
+    */
+
     last_frame_time = QTime::currentTime().msecsSinceStartOfDay();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
     // TODO: 处理键盘事件
+}
+
+void MainWindow::drop(){
 }
 
 

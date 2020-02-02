@@ -7,7 +7,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-enum class Tetromino {IPolyomino, OPolyomino, TPolyomino, JPolyomino, LPolyomino, SPolyomino, ZPolyomino};
+enum class Tetromino {I, O, T, J, L, S, Z};
 
 class MainWindow : public QMainWindow
 {
@@ -37,8 +37,10 @@ private:
     bool tetromino[7][4][4][4];
     int x,y,direction;
     Tetromino current, next;
-    Tetromino generateTetris();
+    bool gameStarted = false;
 
+
+    Tetromino generateTetris();
     void doLeftEvent();
     void doRightEvent();
     void doRotateEvent();
