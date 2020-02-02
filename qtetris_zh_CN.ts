@@ -6,7 +6,6 @@
     <message>
         <location filename="mainwindow.ui" line="14"/>
         <location filename="cmake-build-debug/qtetris_autogen/include/ui_mainwindow.h" line="40"/>
-        <location filename="qtetris_autogen/include/ui_mainwindow.h" line="40"/>
         <source>MainWindow</source>
         <translation type="unfinished"></translation>
     </message>

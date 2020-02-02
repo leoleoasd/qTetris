@@ -14,8 +14,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override;
 
 private:
     Ui::MainWindow *ui;
@@ -23,17 +23,15 @@ private:
     const static int MAXX = 10;
     const static int MAXY = 20;
 
-    int map[MainWindow::MAXX][MainWindow::MAXY]; //模拟右手系第一象限
-    bool tetromino[7][4][4][4]; //七种不同方块，每个方块有四个方向，存在4*4的数组里，每个元素非1即0
-    struct {
-        int x;
-        int y;
-        int name;
-        int direction;
-    }tetrominoCurrent;
+    //模拟左手系第一象限
+    int map[MainWindow::MAXX][MainWindow::MAXY];
+    //七种不同方块，每个方块有四个方向，存在4*4的数组里，每个元素非1即0
+    bool tetromino[7][4][4][4];
+    int x,y,direction;
     Tetromino current, next;
     Tetromino generateTetris();
     void doDownEvent();
+
     void doLeftEvent();
     void doRightEvent();
     void doRotateEvent();

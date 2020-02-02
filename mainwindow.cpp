@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QTimer>
 #include <QRandomGenerator>
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,6 +23,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::paintEvent(QPaintEvent *event)
 {
+    static int last_frame_time = QTime::currentTime().msecsSinceStartOfDay() - 1000/120;
     Q_UNUSED(event);
 
     QPainter painter(this);
@@ -30,12 +32,14 @@ void MainWindow::paintEvent(QPaintEvent *event)
 
     // 设置字体：微软雅黑、点大小50、斜体
     QFont font;
-    font.setPointSize(50);
+    font.setPointSize(12);
     font.setItalic(true);
     painter.setFont(font);
 
     // 绘制文本
-    painter.drawText(rect(), Qt::AlignCenter, QString::number((int)generateTetris()));
+    painter.drawText(0,12, QString::number((int)generateTetris()));
+    painter.drawText(0,24,QString::number(1000.0/(QTime::currentTime().msecsSinceStartOfDay() - last_frame_time)) + QString::fromLocal8Bit("fps."));
+    last_frame_time = QTime::currentTime().msecsSinceStartOfDay();
 }
 
 
